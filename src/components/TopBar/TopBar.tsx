@@ -1,6 +1,7 @@
 import React from 'react';
 import * as s from './TopBar.styled';
 import Menu from './Menu';
+import Info from './Info';
 import color from '../../theme/color';
 
 interface TopBarState {
@@ -15,10 +16,10 @@ export default class TopBar extends React.Component<{}, TopBarState> {
   };
 
   handleMenuClick = (): void => {
-    this.setState({ menuOpen: !this.state.menuOpen });
+    this.setState({ menuOpen: !this.state.menuOpen, infoOpen: false });
   };
   handleInfolick = (): void => {
-    this.setState({ infoOpen: !this.state.infoOpen });
+    this.setState({ menuOpen: false, infoOpen: !this.state.infoOpen });
   };
 
   handleLogoClick = (): void => {
@@ -44,7 +45,6 @@ export default class TopBar extends React.Component<{}, TopBarState> {
             <Hamburger
               open={this.state.menuOpen}
               onClick={this.handleMenuClick}
-              color={this.state.menuOpen ? color.oboon : color.black}
             />
             <img
               src="/images/ic_logo@3x.png"
@@ -57,43 +57,24 @@ export default class TopBar extends React.Component<{}, TopBarState> {
               }}
               onClick={this.handleLogoClick}
             />
-            <div
-              style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '15px',
-                display: 'flex',
-                border: '1px solid',
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center',
-                borderColor: color.grey,
-                cursor: 'pointer',
-              }}
+            <InfoButton
+              open={this.state.infoOpen}
               onClick={this.handleInfolick}
-            >
-              <p
-                style={{
-                  color: color.grey,
-                }}
-              >
-                i
-              </p>
-            </div>
+            />
           </div>
         </s.TopBar>
 
         <Menu open={this.state.menuOpen} />
+        <Info open={this.state.infoOpen} />
       </div>
     );
   }
 }
 
-// hamburger Component below. didn't spllit cause it is only for topbar;
+// button Component below. didn't spllit cause it is only for topbar;
 
 interface HamburgerProps {
   open: boolean;
-  color: string;
   onClick: () => void;
 }
 
@@ -112,14 +93,14 @@ const Hamburger: React.FC<HamburgerProps> = (
             marginBottom: '5px',
             transform: props.open ? 'translateY(7px)  rotate(90deg)' : 'none',
           }}
-          color={props.color}
+          color={props.open ? color.oboon : color.black}
         />
         <s.Line
           style={{
             marginBottom: '5px',
             transform: props.open ? 'translateX(-5px)  rotate(90deg)' : 'none',
           }}
-          color={props.color}
+          color={props.open ? color.oboon : color.black}
         />
         <s.Line
           style={{
@@ -127,9 +108,48 @@ const Hamburger: React.FC<HamburgerProps> = (
               ? 'translateX(-10px) translateY(-7px) rotate(90deg)'
               : 'none',
           }}
-          color={props.color}
+          color={props.open ? color.oboon : color.black}
         />
       </s.LineContainer>
+    </div>
+  );
+};
+
+interface InfoButtonProps {
+  open: boolean;
+  onClick: () => void;
+}
+
+const InfoButton: React.FC<InfoButtonProps> = (props: InfoButtonProps) => {
+  const handleClick = (): void => {
+    props.onClick();
+  };
+
+  return (
+    <div
+      style={{
+        width: '26px',
+        height: '26px',
+        borderRadius: '15px',
+        display: 'flex',
+        border: '1px solid',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        borderColor: props.open ? color.oboon : color.black,
+        backgroundColor: props.open ? color.oboon : 'white',
+        cursor: 'pointer',
+      }}
+      onClick={handleClick}
+    >
+      <p
+        style={{
+          color: props.open ? 'white' : color.black,
+          fontStyle: 'bold',
+        }}
+      >
+        i
+      </p>
     </div>
   );
 };
