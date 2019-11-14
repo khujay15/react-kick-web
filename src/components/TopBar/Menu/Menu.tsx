@@ -3,22 +3,21 @@ import * as s from './Menu.styled';
 import { color } from '../../../theme';
 import useLogin from '@/store/LoginReducer';
 import SelectionArrow from '@/components/module/SelectionArrowSVG';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface MenuProps {
   open: boolean;
   color?: string;
-  delay?: number | string;
-  onClick?: () => void;
-  hover?: boolean;
   point?: number | undefined;
+  history: RouteComponentProps['history'];
 }
 
 const MenuTab: React.FC<MenuProps> = (props: MenuProps): JSX.Element => {
-  const { UserInfo, Test } = useLogin();
+  const { UserInfo } = useLogin();
   console.log('MenuTab: ', UserInfo);
   const menuItems = (
     <s.MenuTabView>
-      <div style={{ lineHeight: '0.5em', marginBottom: '5vh' }}>
+      <span style={{ lineHeight: '0', marginBottom: '5vh' }}>
         {UserInfo.loginSuccess ? (
           <>
             <s.PurpleText>{UserInfo.name}</s.PurpleText>
@@ -26,20 +25,20 @@ const MenuTab: React.FC<MenuProps> = (props: MenuProps): JSX.Element => {
           </>
         ) : (
           <>
-            <s.ArrowItem>
-              <s.PurpleText onClick={Test}>로그인이 필요합니다!</s.PurpleText>
+            <s.ArrowItem onClick={(): void => props.history.push('login')}>
+              <s.PurpleText>로그인이 필요합니다!</s.PurpleText>
               <SelectionArrow />
             </s.ArrowItem>
           </>
         )}
-      </div>
+      </span>
 
       <s.ButtonView>
-        <s.ButtonItem>
+        <s.ButtonItem onClick={(): void => props.history.push('mypoint')}>
           <s.ButtonImage src="/images/icons/ic_mypoint@3x.png" />
           <span>포인트</span>
         </s.ButtonItem>
-        <s.ButtonItem>
+        <s.ButtonItem onClick={(): void => props.history.push('myusage')}>
           <s.ButtonImage src="/images/icons/ic_myhistory@3x.png" />
           <span>이용내역</span>
         </s.ButtonItem>

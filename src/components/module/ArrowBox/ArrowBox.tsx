@@ -2,16 +2,16 @@ import React from 'react';
 import SelectionArrow from '@/components/module/SelectionArrowSVG';
 
 interface ArrowBoxProps {
-  Text: string;
-  NoArrow?: boolean;
+  Text?: string;
+  children?: React.ReactNode;
 }
 
 const ArrowBox: React.FC<ArrowBoxProps> = (props: ArrowBoxProps) => {
   return (
     <div
       style={{
-        boxShadow: '0px 5px 5px 1px #dbdbdb',
-        height: '5vh',
+        boxShadow: '0px 3px 3px #dbdbdb',
+
         minHeight: '50px',
         borderRadius: '5px',
         display: 'flex',
@@ -29,9 +29,13 @@ const ArrowBox: React.FC<ArrowBoxProps> = (props: ArrowBoxProps) => {
           alignItems: 'center',
         }}
       >
-        <span style={{ marginRight: 'auto' }}>{props.Text}</span>
-
-        {!props.NoArrow && <SelectionArrow />}
+        {props.Text && (
+          <>
+            <span style={{ marginRight: 'auto' }}>{props.Text}</span>
+            <SelectionArrow />
+          </>
+        )}
+        {props.children}
       </div>
     </div>
   );

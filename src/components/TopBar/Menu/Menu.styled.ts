@@ -36,6 +36,7 @@ export const PurpleText = styled.span`
   color: ${color.oboon};
   font-size: 20;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const ButtonView = styled.div`

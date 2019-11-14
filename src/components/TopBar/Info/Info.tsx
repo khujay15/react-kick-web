@@ -10,7 +10,7 @@ interface InfoProps {
 const InfoTab: React.FC<InfoProps> = (props: InfoProps): JSX.Element => {
   const menuItems = (
     <s.InfoTabView>
-      <div style={{ fontSize: 25, marginBottom: '20px' }}> 고객지원</div>
+      <div style={{ fontSize: 24, marginBottom: '20px' }}> 고객지원</div>
       <ArrowBox Text="고장신고" />
       <div style={{ marginBottom: '20px' }} />
       <ArrowBox Text="자주 묻는 질문" />

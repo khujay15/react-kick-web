@@ -3,13 +3,18 @@ import * as s from './TopBar.styled';
 import Menu from './Menu';
 import Info from './Info';
 import color from '../../theme/color';
+import { RouteComponentProps } from 'react-router-dom';
+import ScrollLock from 'react-scrolllock';
 
+interface TopBarProps {
+  history: RouteComponentProps['history'];
+}
 interface TopBarState {
   menuOpen: boolean;
   infoOpen: boolean;
 }
 
-export default class TopBar extends React.Component<{}, TopBarState> {
+export default class TopBar extends React.Component<TopBarProps, TopBarState> {
   state = {
     menuOpen: false,
     infoOpen: false,
@@ -29,6 +34,7 @@ export default class TopBar extends React.Component<{}, TopBarState> {
   render(): JSX.Element {
     return (
       <div style={{ width: '100%', marginRight: 0, padding: 0 }}>
+        <ScrollLock />
         <s.TopBar>
           <div
             style={{
@@ -64,14 +70,14 @@ export default class TopBar extends React.Component<{}, TopBarState> {
           </div>
         </s.TopBar>
 
-        <Menu open={this.state.menuOpen} />
+        <Menu open={this.state.menuOpen} history={this.props.history} />
         <Info open={this.state.infoOpen} />
       </div>
     );
   }
 }
 
-// button Component below. didn't spllit cause it is only for topbar;
+// button Component below. didn't spllit bdcause it is only for topbar;
 
 interface HamburgerProps {
   open: boolean;
@@ -91,22 +97,20 @@ const Hamburger: React.FC<HamburgerProps> = (
         <s.Line
           style={{
             marginBottom: '5px',
-            transform: props.open ? 'translateY(7px)  rotate(90deg)' : 'none',
+            transform: props.open ? 'translateY(7px)  rotate(45deg)' : 'none',
           }}
           color={props.open ? color.oboon : color.black}
         />
         <s.Line
           style={{
             marginBottom: '5px',
-            transform: props.open ? 'translateX(-5px)  rotate(90deg)' : 'none',
+            transform: props.open ? 'scale(0,0)' : 'none',
           }}
           color={props.open ? color.oboon : color.black}
         />
         <s.Line
           style={{
-            transform: props.open
-              ? 'translateX(-10px) translateY(-7px) rotate(90deg)'
-              : 'none',
+            transform: props.open ? 'translateY(-7px) rotate(315deg)' : 'none',
           }}
           color={props.open ? color.oboon : color.black}
         />
