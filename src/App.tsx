@@ -8,7 +8,9 @@ import {
   Switch,
 } from 'react-router-dom';
 import MapPage from '../src/pages/MapPage';
-import TopBar from './components/TopBar/';
+import LoginPage from '../src/pages/LoginPage';
+import MyPoint from '../src/pages/MenuPage/MyPoint';
+import MyUsage from '../src/pages/MenuPage/MyUsage';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
@@ -42,6 +44,48 @@ interface WindowSize {
 }
 
 type Props = PPP & LoginReducerState & DispatchProps;
+
+class App extends React.Component<Props, SSS> {
+  state = {
+    menuOpen: false,
+  };
+
+  routeChange = (): void => {
+    const path = `home/sssss`;
+    this.props.history.push(path);
+  };
+
+  handleMenuClick(): void {
+    this.setState({ menuOpen: !this.state.menuOpen });
+  }
+
+  handleLinkClick(): void {
+    this.setState({ menuOpen: false });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleClick = (event: any): void => {
+    // accessible
+    console.log('style: ', event.target.style);
+    console.log('class List', event.target.classList); //to change style via css
+    event.target.style.backgroundColor = 'blue';
+  };
+
+  render(): JSX.Element {
+    return (
+      <>
+        <Switch>
+          <Route exact path="/" component={MapPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/mypoint" component={MyPoint} />
+          <Route exact path="/myusage" component={MyUsage} />
+          <Route exact path="/app" component={AppAp} />
+          <Route exact path="/home/:name" component={Home} />
+        </Switch>
+      </>
+    );
+  }
+}
 
 function getWindowDimensions(): WindowSize {
   const { innerWidth: width, innerHeight: height } = window;
@@ -79,46 +123,6 @@ const Home: React.FC<RouteComponentProps<{ name: string }>> = (
     </>
   );
 };
-
-class App extends React.Component<Props, SSS> {
-  state = {
-    menuOpen: false,
-  };
-
-  routeChange = (): void => {
-    const path = `home/sssss`;
-    this.props.history.push(path);
-  };
-
-  handleMenuClick(): void {
-    this.setState({ menuOpen: !this.state.menuOpen });
-  }
-
-  handleLinkClick(): void {
-    this.setState({ menuOpen: false });
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleClick = (event: any): void => {
-    // accessible
-    console.log('style: ', event.target.style);
-    console.log('class List', event.target.classList); //to change style via css
-    event.target.style.backgroundColor = 'blue';
-  };
-
-  render(): JSX.Element {
-    return (
-      <>
-        <TopBar />
-        <Switch>
-          <Route exact path="/" component={MapPage} />
-          <Route exact path="/app" component={AppAp} />
-          <Route exact path="/home/:name" component={Home} />
-        </Switch>
-      </>
-    );
-  }
-}
 
 const AppAp: React.FC<PPP> = (Props): JSX.Element => {
   const { height, width } = useWindowDimensions();

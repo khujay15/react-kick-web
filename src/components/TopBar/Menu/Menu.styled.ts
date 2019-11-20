@@ -2,12 +2,6 @@
 import styled from 'styled-components';
 import { color } from '@/theme';
 
-export const MenuItemContainer = styled.div`
-  margin-top: 5vh;
-  width: 20vw;
-  height: 10vh;
-`;
-
 export const MenuContainer = styled.div<{ open: string | number | boolean }>`
   position: fixed;
   top: 0;
@@ -42,6 +36,7 @@ export const PurpleText = styled.span`
   color: ${color.oboon};
   font-size: 20;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const ButtonView = styled.div`

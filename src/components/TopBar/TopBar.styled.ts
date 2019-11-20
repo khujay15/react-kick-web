@@ -20,7 +20,7 @@ export const Line = styled.div`
   height: 2px;
   width: 20px;
   background: ${props => (props.color ? props.color : 'black')};
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 `;
 
 export const LineContainer = styled.div`
