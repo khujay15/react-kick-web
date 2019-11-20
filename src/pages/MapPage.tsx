@@ -25,7 +25,7 @@ const SimpleMap: React.FC<RouteComponentProps> = (props): JSX.Element => {
       <TopBar {...props} />
       <AlertModal />
 
-      <div style={{ height: '100vh', width: '100%', display: 'flex' }}>
+      <div style={{ height: '100vh', width: '100vw', display: 'flex' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyB0dvh05pdwBNJwFUVSE5AIn5L98Wskyqc' }}
           defaultZoom={15}
